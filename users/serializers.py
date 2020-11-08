@@ -41,6 +41,7 @@ class FullUserSerializer(serializers.ModelSerializer):
 
 class UserPositionSerializer(serializers.ModelSerializer):
 
+    id = serializers.IntegerField(source='user.id')
     user_url = serializers.URLField(source='user.vkuser.get_user_profile_url')
     first_name = serializers.CharField(source='user.userinfo.first_name')
     second_name = serializers.CharField(source='user.userinfo.second_name')

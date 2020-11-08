@@ -44,7 +44,9 @@ def get_user_position(user: User, data: Dict):
     user_position.latitude = data.get('latitude', user_position.latitude)
     user_position.longitude = data.get('longitude', user_position.longitude)
     user_position.save()
-    return {"success": True, "data": UserPositionSerializer(user_position).data}
+    user_data = dict(UserPositionSerializer(user_position).data)
+    user_data['score'] = AnswerMark.objects.filter(answer__commentator=user_data.get('id')).all().aggregate(Avg('mark'))['mark__avg']
+    return {"success": True, "data": user_data}
 
 
 def update_user_info(user: User, data: Dict) -> Dict:
@@ -62,10 +64,14 @@ def update_user_info(user: User, data: Dict) -> Dict:
 
 def update_interests(user: User, data: Dict) -> Dict:
     if data.get('interests') and isinstance(data.get('interests'), list):
+        user.userinfo.interests.clear()
         for item_id in data.get('interests'):
             interest = UserInterest.objects.filter(pk=item_id).first()
+            print(interest)
             if interest:
                 user.userinfo.interests.add(interest)
+
+        user.userinfo.interests.save()
         user.userinfo.save()
         return {"success": True, "data": "ok"}
     return {'success': False, "errors": "invalid format"}
@@ -74,5 +80,10 @@ def update_interests(user: User, data: Dict) -> Dict:
 def get_users_geo(user: User) -> Dict:
     user_positions = UserPosition.objects.filter(~Q(latitude=None, longitude=None, user=user)).all()
     user_positions_ser = UserPositionSerializer(user_positions, many=True)
-    return {"success": True, "data": user_positions_ser.data}
+    positions_with_score = []
+    for item in list(user_positions_ser.data):
+        user_data = dict(item)
+        user_data['score'] = AnswerMark.objects.filter(answer__commentator=user_data.get('id')).all().aggregate(Avg('mark'))['mark__avg']
+        positions_with_score.append(user_data)
+    return {"success": True, "data": positions_with_score}
 
