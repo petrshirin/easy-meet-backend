@@ -28,7 +28,7 @@ class UserInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255, default=None, null=True)
     second_name = models.CharField(max_length=255, default=None, null=True)
-    avatar = models.URLField(null=True, default=True)
+    avatar = models.URLField(null=True, default=True, max_length=1024)
     interests = models.ManyToManyField(UserInterest)
 
 
