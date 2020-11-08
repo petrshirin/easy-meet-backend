@@ -44,8 +44,9 @@ class UserPositionSerializer(serializers.ModelSerializer):
     user_url = serializers.URLField(source='user.vkuser.get_user_profile_url')
     first_name = serializers.CharField(source='user.userinfo.first_name')
     second_name = serializers.CharField(source='user.userinfo.second_name')
+    interests = UserInterestSerializer(many=True, source='user.userinfo.interests')
     avatar = serializers.URLField(source='user.userinfo.avatar')
 
     class Meta:
         model = UserPosition
-        fields = ['first_name', 'second_name', 'avatar', 'user_url', 'avatar', 'latitude', 'longitude']
+        fields = ['first_name', 'second_name', 'avatar', 'user_url', 'interests', 'avatar', 'latitude', 'longitude']
