@@ -183,6 +183,7 @@ CORS_ORIGIN_WHITELIST = [
     'https://prod-app7650401-990740e41dde.pages.vk-apps.com',
     'https://prod-app7650401-60b5c8dd9d6c.pages.vk-apps.com',
     'https://prod-app7650401-60b5c8dd9d6c.pages.vk-apps.com',
+    'https://prod-app7650401-c69110eea314.pages.vk-apps.com'
 ]
 
 CORS_ALLOW_METHODS = [
