@@ -43,7 +43,7 @@ def update_interests_view(request: Request) -> Response:
         return Response(response, status=201)
 
 
-@api_view(['GET'])
+@api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def update_interests_view(request: Request) -> Response:
     response = get_users_geo(request.user)
