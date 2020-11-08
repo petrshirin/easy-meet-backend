@@ -71,7 +71,6 @@ def update_interests(user: User, data: Dict) -> Dict:
             if interest:
                 user.userinfo.interests.add(interest)
 
-        user.userinfo.interests.save()
         user.userinfo.save()
         return {"success": True, "data": "ok"}
     return {'success': False, "errors": "invalid format"}
