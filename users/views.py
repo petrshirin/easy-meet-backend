@@ -40,7 +40,7 @@ def get_users_to_map_view(request: Request) -> Response:
     if response.get('errors'):
         return Response(response, status=422)
     else:
-        return Response(response, status=201)
+        return Response(response, status=200)
 
 
 @api_view(['PUT'])
