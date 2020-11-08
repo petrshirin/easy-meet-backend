@@ -33,10 +33,10 @@ def update_user_info_view(request: Request) -> Response:
         return Response(response, status=201)
 
 
-@api_view(['PUT'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def update_interests_view(request: Request) -> Response:
-    response = update_interests(request.user, request.data)
+    response = get_users_geo(request.user)
     if response.get('errors'):
         return Response(response, status=422)
     else:
