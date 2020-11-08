@@ -77,7 +77,7 @@ def update_interests(user: User, data: Dict) -> Dict:
 
 
 def get_users_geo(user: User) -> Dict:
-    user_positions = UserPosition.objects.filter(~Q(latitude=None, longitude=None), user__exclude=user).all()
+    user_positions = UserPosition.objects.filter(~Q(latitude=None, longitude=None)).exclude(user=user).all()
     user_positions_ser = UserPositionSerializer(user_positions, many=True)
     positions_with_score = []
     for item in list(user_positions_ser.data):
