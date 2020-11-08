@@ -50,4 +50,4 @@ class UserPositionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserPosition
-        fields = ['first_name', 'second_name', 'avatar', 'user_url', 'interests', 'avatar', 'latitude', 'longitude']
+        fields = ['id', 'first_name', 'second_name', 'avatar', 'user_url', 'interests', 'avatar', 'latitude', 'longitude']
