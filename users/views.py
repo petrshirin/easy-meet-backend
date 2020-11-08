@@ -46,7 +46,7 @@ def update_interests_view(request: Request) -> Response:
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def update_interests_view(request: Request) -> Response:
-    response = get_users_geo(request.user)
+    response = update_interests(request.user, request.data)
     if response.get('errors'):
         return Response(response, status=422)
     else:
