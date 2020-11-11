@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'users',
     'meetings',
-    'questions'
+    'questions',
+    'redirect_img',
+
 ]
 
 MIDDLEWARE = [

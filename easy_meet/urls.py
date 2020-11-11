@@ -21,4 +21,5 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('meeting/', include('meetings.urls')),
     path('question/', include('questions.urls')),
+    path('image/', include('redirect_img.urls')),
 ]
